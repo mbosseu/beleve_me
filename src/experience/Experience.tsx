@@ -74,8 +74,13 @@ export default function Experience() {
   // Resolution adapts to the device: it steps down when frames drop.
   const [dpr, setDpr] = useState<number | null>(null);
   if (!caps) return null;
-  const max = caps.dpr[1];
-  const current = dpr ?? max;
+  // Never render below the screen's own resolution on standard displays
+  // (that is what made everything soft): adapt only between native and a
+  // high-density ceiling on retina / phones.
+  const native = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+  const max = Math.min(native, caps.dpr[1]);
+  const floor = native < 2 ? native : 1.5;
+  const current = Math.max(floor, Math.min(max, dpr ?? max));
 
   return (
     <div className="fixed inset-0 z-0" aria-hidden>
@@ -94,7 +99,7 @@ export default function Experience() {
         <PerformanceMonitor
           bounds={() => [40, 58]}
           flipflops={4}
-          onDecline={() => setDpr((d) => Math.max(0.65, +((d ?? max) - 0.2).toFixed(2)))}
+          onDecline={() => setDpr((d) => Math.max(floor, +((d ?? max) - 0.2).toFixed(2)))}
           onIncline={() => setDpr((d) => Math.min(max, +((d ?? max) + 0.15).toFixed(2)))}
         />
         <Suspense fallback={null}>
