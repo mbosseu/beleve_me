@@ -7,7 +7,6 @@ import * as THREE from "three";
 import { progress } from "@/experience/progress";
 import { cutout, faithfulMaterial } from "@/lib/cutout";
 import { PIECE_Y } from "./layout";
-import Lookbook from "./Lookbook";
 
 /**
  * The signature piece shown with the brand's OWN visuals, pixel for pixel:
@@ -84,7 +83,9 @@ export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
     const zip = win(p, 0.58, 0.61, 0.68, 0.7);
     const mono = win(p, 0.68, 0.7, 0.77, 0.79);
     const cuff = win(p, 0.77, 0.79, 0.85, 0.87);
-    const piece = 1 - Math.max(zip, mono, cuff);
+    // The closing lookbook is drawn in HTML (sharp photos): the 3D piece bows out.
+    const lookbook = sm(0.86, 0.89, p);
+    const piece = (1 - Math.max(zip, mono, cuff)) * (1 - lookbook);
 
     m.front.opacity = wF * piece;
     m.back.opacity = wB * piece;
@@ -122,8 +123,6 @@ export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
         </mesh>
       ))}
 
-      {/* Worn by the founder — lookbook spread */}
-      <Lookbook />
 
       <mesh material={shadow} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, 0]} scale={[1.1, 0.5, 1]}>
         <planeGeometry args={[1, 1]} />
