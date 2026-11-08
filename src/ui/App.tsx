@@ -12,6 +12,7 @@ import Intro from "./Intro";
 import CartDrawer from "./CartDrawer";
 import Narration from "./Narration";
 import ProductSheet from "./ProductSheet";
+import SignatureCta from "./SignatureCta";
 import ScrollManager from "./ScrollManager";
 import StaticFallback from "./StaticFallback";
 
@@ -43,6 +44,7 @@ export default function App() {
       <Narration />
       <Chrome />
       <ChapterNav />
+      <SignatureCta />
       <ProductSheet />
       <CartDrawer />
       <Intro />

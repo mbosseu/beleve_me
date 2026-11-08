@@ -52,7 +52,7 @@ export const chapters: Chapter[] = [
     title: "The Signature Piece",
     label: "La pièce signature",
     status: "live",
-    length: 8,
+    length: 11,
     Scene: lazy(() => import("@/scenes/04-signature/SignatureScene")),
   },
   {

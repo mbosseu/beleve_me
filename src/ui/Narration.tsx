@@ -224,8 +224,8 @@ const BEATS: Beat[] = [
   {
     id: "sig-zip",
     chapter: "signature",
-    in: [0.63, 0.65],
-    out: [0.71, 0.73],
+    in: [0.61, 0.63],
+    out: [0.67, 0.69],
     lines: ["05 — Fermeture", "Zip métal argent · tirette gravée BM"],
     variant: "caption",
     align: "corner",
@@ -233,8 +233,8 @@ const BEATS: Beat[] = [
   {
     id: "sig-fabric",
     chapter: "signature",
-    in: [0.74, 0.76],
-    out: [0.81, 0.83],
+    in: [0.7, 0.72],
+    out: [0.76, 0.78],
     lines: ["06 — Matière & monogramme", "Nylon mat · BM brodé ton sur ton beige"],
     variant: "caption",
     align: "corner",
@@ -242,18 +242,9 @@ const BEATS: Beat[] = [
   {
     id: "sig-finish",
     chapter: "signature",
-    in: [0.84, 0.86],
-    out: [0.91, 0.93],
+    in: [0.79, 0.81],
+    out: [0.84, 0.86],
     lines: ["07 — Finitions", "Bord-côte élastiqué · poignets resserrés"],
-    variant: "caption",
-    align: "corner",
-  },
-  {
-    id: "sig-free",
-    chapter: "signature",
-    in: [0.95, 0.975],
-    out: [1.1, 1.2],
-    lines: ["Portée par le fondateur", "Glissez pour faire tourner la pièce"],
     variant: "caption",
     align: "corner",
   },
@@ -410,7 +401,7 @@ export default function Narration() {
           // …and between the atelier (03) and the studio (04).
           smooth(0.95, 0.995, smoothed.creation) * (1 - smooth(0.002, 0.02, smoothed.signature)),
           // …and between the studio (04) and the showroom (05).
-          smooth(0.955, 0.995, smoothed.signature) * (1 - smooth(0.002, 0.02, smoothed.collection)),
+          smooth(0.988, 0.999, smoothed.signature) * (1 - smooth(0.002, 0.02, smoothed.collection)),
           // …and between the showroom (05) and the message (06).
           smooth(0.95, 0.995, smoothed.collection) * (1 - smooth(0.004, 0.04, smoothed.message)),
         ).toFixed(3);

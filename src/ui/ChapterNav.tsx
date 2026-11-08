@@ -30,7 +30,7 @@ export default function ChapterNav() {
               >
                 <span
                   className={`absolute right-full mr-3 whitespace-nowrap font-sans text-[9px] uppercase tracking-[0.3em] transition-all duration-500 ${
-                    isActive ? "opacity-100 text-paper" : "opacity-0 group-hover:opacity-70 text-mist"
+                    isActive ? "opacity-0 group-hover:opacity-100 text-paper" : "opacity-0 group-hover:opacity-70 text-mist"
                   }`}
                 >
                   {c.title}

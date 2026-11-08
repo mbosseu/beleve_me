@@ -5,9 +5,9 @@ import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { progress } from "@/experience/progress";
-import { useExperience } from "@/experience/store";
 import { cutout, faithfulMaterial } from "@/lib/cutout";
 import { PIECE_Y } from "./layout";
+import Lookbook from "./Lookbook";
 
 /**
  * The signature piece shown with the brand's OWN visuals, pixel for pixel:
@@ -25,7 +25,6 @@ const sm = (a: number, b: number, v: number) => THREE.MathUtils.smoothstep(v, a,
 const win = (p: number, a: number, b: number, c: number, d: number) => sm(a, b, p) * (1 - sm(c, d, p));
 
 export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
-  const isMobile = useExperience((s) => s.caps?.isMobile ?? false);
   const tex = useTexture({
     front: P + "front.jpg",
     side: P + "side.jpg",
@@ -33,8 +32,6 @@ export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
     zip: P + "detail-zip.jpg",
     monogram: P + "detail-monogram.jpg",
     cuff: P + "detail-cuff.jpg",
-    wornFront: P + "worn-front.jpg",
-    wornBack: P + "worn-back.jpg",
   });
 
   const m = useMemo(() => {
@@ -51,8 +48,6 @@ export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
       zip: plain(tex.zip),
       monogram: plain(tex.monogram),
       cuff: plain(tex.cuff),
-      wornFront: plain(tex.wornFront),
-      wornBack: plain(tex.wornBack),
     };
   }, [tex]);
   useEffect(() => () => Object.values(m).forEach((mat) => mat.dispose()), [m]);
@@ -86,11 +81,10 @@ export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
     wS /= sum;
 
     // The full piece steps aside while a macro detail is on stage.
-    const zip = win(p, 0.6, 0.63, 0.72, 0.74);
-    const mono = win(p, 0.72, 0.74, 0.82, 0.84);
-    const cuff = win(p, 0.82, 0.84, 0.92, 0.94);
+    const zip = win(p, 0.58, 0.61, 0.68, 0.7);
+    const mono = win(p, 0.68, 0.7, 0.77, 0.79);
+    const cuff = win(p, 0.77, 0.79, 0.85, 0.87);
     const piece = 1 - Math.max(zip, mono, cuff);
-    const worn = sm(0.93, 0.98, p);
 
     m.front.opacity = wF * piece;
     m.back.opacity = wB * piece;
@@ -98,8 +92,6 @@ export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
     m.zip.opacity = zip;
     m.monogram.opacity = mono;
     m.cuff.opacity = cuff;
-    m.wornFront.opacity = worn;
-    m.wornBack.opacity = worn;
     shadow.opacity = piece;
 
     // A hint of turntable parallax: the visible view sways with the turn.
@@ -108,8 +100,6 @@ export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
 
   const H = 0.8; // jacket height on stage, metres
   const plateW = 0.66;
-  const wornX = isMobile ? 0.5 : 0.86;
-  const wornH = isMobile ? 0.66 : 1.05;
 
   return (
     <group>
@@ -132,13 +122,8 @@ export default function PhotoPiece({ yaw }: { yaw: { current: number } }) {
         </mesh>
       ))}
 
-      {/* Worn by the founder */}
-      <mesh material={m.wornFront} position={[-wornX, C - 0.02, -0.25]} renderOrder={2}>
-        <planeGeometry args={[wornH * (660 / 1328), wornH]} />
-      </mesh>
-      <mesh material={m.wornBack} position={[wornX, C - 0.02, -0.25]} renderOrder={2}>
-        <planeGeometry args={[wornH * (700 / 1348), wornH]} />
-      </mesh>
+      {/* Worn by the founder — lookbook spread */}
+      <Lookbook />
 
       <mesh material={shadow} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, 0]} scale={[1.1, 0.5, 1]}>
         <planeGeometry args={[1, 1]} />
