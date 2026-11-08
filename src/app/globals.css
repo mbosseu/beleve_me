@@ -154,3 +154,9 @@ html.is-rotating * {
 @media (prefers-reduced-motion: reduce) {
   .intro-board { animation: none; }
 }
+
+/* Home: the board's own paper colour replaces the black background */
+.intro-paper {
+  /* sampled from the board's margins, so the image meets it seamlessly */
+  background: #e0d5cb;
+}

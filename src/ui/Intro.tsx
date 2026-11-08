@@ -58,11 +58,11 @@ export default function Intro() {
 
   return (
     <div
-      className={`fixed inset-0 z-50 overflow-y-auto bg-ink text-paper transition-opacity duration-[1400ms] ease-out ${
+      className={`fixed inset-0 z-50 intro-paper overflow-y-auto text-ink transition-opacity duration-[1400ms] ease-out ${
         entered ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
-      <div className="mx-auto flex min-h-full w-full max-w-[1500px] flex-col items-center justify-center gap-10 px-5 py-10 lg:flex-row lg:gap-[5vw] lg:px-[4vw]">
+      <div className="mx-auto flex min-h-full w-full max-w-[1760px] flex-col items-center justify-center gap-8 px-4 py-8 lg:flex-row lg:gap-[3vw] lg:px-[2.5vw] lg:py-[3vh]">
         {/* The brand board, shown whole and untouched */}
         <figure className="intro-board w-full lg:w-auto lg:flex-[0_1_auto]">
           <img
@@ -70,18 +70,18 @@ export default function Intro() {
             alt="BELIEVE ME — Doudoune signature : vues face et dos, détails de broderie, étiquette, zip et matière, coloris disponibles"
             width={1536}
             height={1024}
-            className="mx-auto block h-auto w-full max-w-[min(100%,calc(80vh*1.5))] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.9)] lg:max-h-[80vh] lg:w-auto"
+            className="intro-board-img mx-auto block h-auto w-full lg:max-h-[94vh] lg:w-auto"
           />
         </figure>
 
         <div className="flex shrink-0 flex-col items-center text-center lg:w-[min(30vw,380px)]">
-          <p className="pl-[0.42em] font-serif text-[clamp(1.1rem,2vw,1.6rem)] tracking-[0.42em] text-paper/90">BELIEVE ME</p>
-          <p className="mt-3 font-serif text-sm italic text-mist/50">More than clothing. A story you can wear.</p>
+          <p className="pl-[0.42em] font-serif text-[clamp(1.1rem,2vw,1.6rem)] tracking-[0.42em] text-ink">BELIEVE ME</p>
+          <p className="mt-3 font-serif text-sm italic text-graphite/70">More than clothing. A story you can wear.</p>
 
-          <div className="mt-8 h-px w-40 overflow-hidden bg-paper/10">
-            <div className="h-full bg-embroidery/80 transition-[width] duration-500 ease-out" style={{ width: `${pct}%` }} />
+          <div className="mt-8 h-px w-40 overflow-hidden bg-ink/10">
+            <div className="h-full bg-[#4a2b1d] transition-[width] duration-500 ease-out" style={{ width: `${pct}%` }} />
           </div>
-          <p className="mt-4 font-sans text-[10px] tabular-nums tracking-[0.35em] text-mist/50">
+          <p className="mt-4 font-sans text-[10px] tabular-nums tracking-[0.35em] text-graphite/60">
             {ready ? "PRÊT" : `${String(pct).padStart(3, "0")}`}
           </p>
 
@@ -92,18 +92,18 @@ export default function Intro() {
           >
             <button
               onClick={() => onEnter(true)}
-              className="group relative w-52 border border-paper/20 py-3.5 font-sans text-[11px] tracking-[0.45em] text-paper transition-colors duration-500 hover:border-embroidery/70"
+              className="group relative w-52 border border-ink/80 bg-ink py-3.5 font-sans text-[11px] tracking-[0.45em] text-paper transition-colors duration-500 hover:bg-[#4a2b1d] hover:border-[#4a2b1d]"
             >
               <span className="pl-[0.45em]">ENTRER</span>
-              <span className="absolute inset-x-10 bottom-2 h-px origin-left scale-x-0 bg-embroidery transition-transform duration-500 group-hover:scale-x-100" />
+              <span className="absolute inset-x-10 bottom-2 h-px origin-left scale-x-0 bg-paper/70 transition-transform duration-500 group-hover:scale-x-100" />
             </button>
             <button
               onClick={() => onEnter(false)}
-              className="font-sans text-[10px] tracking-[0.3em] text-mist/45 transition-colors hover:text-mist/80"
+              className="font-sans text-[10px] tracking-[0.3em] text-graphite/60 transition-colors hover:text-ink"
             >
               ENTRER SANS LE SON
             </button>
-            <p className="mt-4 max-w-[18rem] text-center font-serif text-sm italic text-mist/40">
+            <p className="mt-4 max-w-[18rem] text-center font-serif text-sm italic text-graphite/55">
               Une expérience à vivre avec le son.
             </p>
           </div>
