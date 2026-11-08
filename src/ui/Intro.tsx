@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useState } from "react";
 import { useProgress } from "@react-three/drei";
@@ -57,45 +58,56 @@ export default function Intro() {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-ink text-paper transition-opacity duration-[1400ms] ease-out ${
+      className={`fixed inset-0 z-50 overflow-y-auto bg-ink text-paper transition-opacity duration-[1400ms] ease-out ${
         entered ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
-      <p className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] tracking-[0.42em] pl-[0.42em] text-paper/90">
-        BELIEVE ME
-      </p>
+      <div className="mx-auto flex min-h-full w-full max-w-[1500px] flex-col items-center justify-center gap-10 px-5 py-10 lg:flex-row lg:gap-[5vw] lg:px-[4vw]">
+        {/* The brand board, shown whole and untouched */}
+        <figure className="intro-board w-full lg:w-auto lg:flex-[0_1_auto]">
+          <img
+            src="/textures/home-signature-board.jpg"
+            alt="BELIEVE ME — Doudoune signature : vues face et dos, détails de broderie, étiquette, zip et matière, coloris disponibles"
+            width={1536}
+            height={1024}
+            className="mx-auto block h-auto w-full max-w-[min(100%,calc(80vh*1.5))] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.9)] lg:max-h-[80vh] lg:w-auto"
+          />
+        </figure>
 
-      <div className="mt-8 h-px w-40 bg-paper/10 overflow-hidden">
-        <div
-          className="h-full bg-embroidery/80 transition-[width] duration-500 ease-out"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-      <p className="mt-4 font-sans text-[10px] tracking-[0.35em] text-mist/50 tabular-nums">
-        {ready ? "PRÊT" : `${String(pct).padStart(3, "0")}`}
-      </p>
+        <div className="flex shrink-0 flex-col items-center text-center lg:w-[min(30vw,380px)]">
+          <p className="pl-[0.42em] font-serif text-[clamp(1.1rem,2vw,1.6rem)] tracking-[0.42em] text-paper/90">BELIEVE ME</p>
+          <p className="mt-3 font-serif text-sm italic text-mist/50">More than clothing. A story you can wear.</p>
 
-      <div
-        className={`mt-14 flex flex-col items-center gap-5 transition-all duration-1000 ${
-          ready ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 translate-y-3"
-        }`}
-      >
-        <button
-          onClick={() => onEnter(true)}
-          className="group relative font-sans text-[11px] tracking-[0.45em] pl-[0.45em] text-paper py-3 px-8 border border-paper/20 hover:border-embroidery/70 transition-colors duration-500"
-        >
-          ENTRER
-          <span className="absolute inset-x-8 bottom-2 h-px origin-left scale-x-0 bg-embroidery transition-transform duration-500 group-hover:scale-x-100" />
-        </button>
-        <button
-          onClick={() => onEnter(false)}
-          className="font-sans text-[10px] tracking-[0.3em] text-mist/45 hover:text-mist/80 transition-colors"
-        >
-          ENTRER SANS LE SON
-        </button>
-        <p className="mt-6 max-w-[18rem] text-center font-serif italic text-sm text-mist/40">
-          Une expérience à vivre avec le son.
-        </p>
+          <div className="mt-8 h-px w-40 overflow-hidden bg-paper/10">
+            <div className="h-full bg-embroidery/80 transition-[width] duration-500 ease-out" style={{ width: `${pct}%` }} />
+          </div>
+          <p className="mt-4 font-sans text-[10px] tabular-nums tracking-[0.35em] text-mist/50">
+            {ready ? "PRÊT" : `${String(pct).padStart(3, "0")}`}
+          </p>
+
+          <div
+            className={`mt-10 flex flex-col items-center gap-5 transition-all duration-1000 ${
+              ready ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
+            }`}
+          >
+            <button
+              onClick={() => onEnter(true)}
+              className="group relative w-52 border border-paper/20 py-3.5 font-sans text-[11px] tracking-[0.45em] text-paper transition-colors duration-500 hover:border-embroidery/70"
+            >
+              <span className="pl-[0.45em]">ENTRER</span>
+              <span className="absolute inset-x-10 bottom-2 h-px origin-left scale-x-0 bg-embroidery transition-transform duration-500 group-hover:scale-x-100" />
+            </button>
+            <button
+              onClick={() => onEnter(false)}
+              className="font-sans text-[10px] tracking-[0.3em] text-mist/45 transition-colors hover:text-mist/80"
+            >
+              ENTRER SANS LE SON
+            </button>
+            <p className="mt-4 max-w-[18rem] text-center font-serif text-sm italic text-mist/40">
+              Une expérience à vivre avec le son.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
