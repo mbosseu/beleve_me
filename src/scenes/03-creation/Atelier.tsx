@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { progress } from "@/experience/progress";
 import Table from "@/scenes/01-beginning/Table";
 import { LAMP_Y, LAMPS, MAT_Y, TABLE, TIMING, WALL_Z, step } from "./layout";
 import { createCuttingMat } from "./textures";
@@ -94,7 +95,12 @@ export default function Atelier({ high, shadowMapSize }: { high: boolean; shadow
     const on = step(TIMING.lamps);
     if (hemi.current) hemi.current.intensity = 0.02 + 0.06 * on;
     // Soft picture light that only rises when the sketches go up.
-    if (boardLight.current) boardLight.current.intensity = 7 * step(TIMING.sketches);
+    if (boardLight.current) {
+      // Only around the pin board (kept in the scene: toggling a light recompiles shaders).
+      const p = progress.creation;
+      const level = 7 * step(TIMING.sketches) * (1 - THREE.MathUtils.smoothstep(p, 0.24, 0.3));
+      boardLight.current.intensity = level;
+    }
   });
 
   return (
@@ -115,7 +121,7 @@ export default function Atelier({ high, shadowMapSize }: { high: boolean; shadow
           index={i}
           x={l.x}
           z={l.z}
-          shadows={high || i === 1}
+          shadows={i === 1}
           shadowMapSize={shadowMapSize}
         />
       ))}
@@ -123,13 +129,13 @@ export default function Atelier({ high, shadowMapSize }: { high: boolean; shadow
       <Table width={TABLE.width} depth={TABLE.depth} textureSize={high ? 2048 : 1024} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, MAT_Y - 0.002, 0.02]} receiveShadow>
         <planeGeometry args={[TABLE.width - 0.5, TABLE.depth - 0.3]} />
-        <meshStandardMaterial map={mat} roughness={0.85} />
+        <meshLambertMaterial map={mat} />
       </mesh>
 
       {/* Wall + pin board */}
       <mesh position={[0, 1.2, WALL_Z]} receiveShadow>
         <planeGeometry args={[12, 5]} />
-        <meshStandardMaterial color="#151413" roughness={0.97} />
+        <meshLambertMaterial color="#151413" />
       </mesh>
       <mesh position={[-1.6, 0.78, WALL_Z + 0.02]} receiveShadow castShadow>
         <boxGeometry args={[1.5, 0.95, 0.025]} />

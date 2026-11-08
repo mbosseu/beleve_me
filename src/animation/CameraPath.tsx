@@ -3,7 +3,7 @@
 import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { activeChapterId, progress, scene } from "@/experience/progress";
+import { activeChapterId, DAMPING, justJumped, progress, scene } from "@/experience/progress";
 import { useExperience } from "@/experience/store";
 
 export interface CameraKey {
@@ -76,7 +76,9 @@ export default function CameraPath({
 
   useFrame((frame, delta) => {
     const dt = Math.min(delta, 1 / 20);
-    s.smoothed += ((progress[chapter] ?? 0) - s.smoothed) * (1 - Math.exp(-dt * (reduced ? 12 : 2.6)));
+    const goal = progress[chapter] ?? 0;
+    if (justJumped()) s.smoothed = goal;
+    else s.smoothed += (goal - s.smoothed) * (1 - Math.exp(-dt * (reduced ? 12 : DAMPING)));
     if (activeChapterId() !== chapter) return;
 
     const targetFov = isMobile ? fov[1] : fov[0];

@@ -109,3 +109,17 @@ html.is-rotating * {
   cursor: grabbing !important;
   user-select: none;
 }
+
+/* Quick black cut used for long jumps (navigation, buttons) */
+.jump-curtain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+  background: var(--color-ink);
+  opacity: 0;
+  transition: opacity 0.26s ease;
+}
+.jump-curtain.is-on {
+  opacity: 1;
+}

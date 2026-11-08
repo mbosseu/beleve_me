@@ -1,6 +1,6 @@
 "use client";
 
-import { scrollToElement } from "@/animation/scroll";
+import { scrollToChapterProgress } from "@/animation/scroll";
 import { chapters } from "@/experience/chapters";
 import { useExperience } from "@/experience/store";
 
@@ -24,7 +24,7 @@ export default function ChapterNav() {
             <li key={c.id}>
               <button
                 disabled={!live}
-                onClick={() => scrollToElement(`#chapter-${c.id}`)}
+                onClick={() => scrollToChapterProgress(c.id, c.index === "01" ? 0 : 0.05)}
                 className="group relative flex w-14 items-center justify-end gap-3 disabled:cursor-default"
                 title={live ? c.title : `${c.title} — en création`}
               >

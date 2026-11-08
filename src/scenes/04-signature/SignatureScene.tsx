@@ -44,7 +44,7 @@ export default function SignatureScene() {
   useFrame((_, delta) => {
     const dt = Math.min(delta, 1 / 20);
     const target = pieceYaw(progress.signature) + userYaw(dt);
-    smoothYaw.current += (target - smoothYaw.current) * (1 - Math.exp(-dt * (reduced ? 14 : 3.2)));
+    smoothYaw.current += (target - smoothYaw.current) * (1 - Math.exp(-dt * (reduced ? 14 : 5)));
   });
 
   return (
@@ -57,7 +57,7 @@ export default function SignatureScene() {
         scene.environmentIntensity = 0.32;
       }}
     >
-      <Studio shadowMapSize={high ? 2048 : 1024} />
+      <Studio shadowMapSize={high ? 1024 : 512} />
       <PhotoPiece yaw={smoothYaw} />
       <CameraPath
         chapter="signature"

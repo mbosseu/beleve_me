@@ -1,7 +1,7 @@
 "use client";
 
 import { ambience } from "@/audio/ambience";
-import { scrollToElement } from "@/animation/scroll";
+import { scrollToChapterProgress } from "@/animation/scroll";
 import { useExperience } from "@/experience/store";
 
 /** Persistent frame: wordmark, sound toggle, mobile chapter counter. */
@@ -25,14 +25,14 @@ export default function Chrome() {
       }`}
     >
       <button
-        onClick={() => scrollToElement("#chapter-beginning")}
+        onClick={() => scrollToChapterProgress("beginning", 0)}
         className="pointer-events-auto absolute left-5 top-5 sm:left-8 sm:top-7 font-serif text-[13px] tracking-[0.42em] text-paper/85 mix-blend-difference"
       >
         BELIEVE ME
       </button>
 
       <div className="pointer-events-auto absolute right-5 top-6 sm:right-8 sm:top-8 flex gap-6 font-sans text-[9px] tracking-[0.35em] text-mist/70 mix-blend-difference">
-        <button onClick={() => scrollToElement("#chapter-collection")} className="hover:text-paper">
+        <button onClick={() => scrollToChapterProgress("collection", 0.2)} className="hover:text-paper">
           COLLECTION
         </button>
         <button onClick={() => setCartOpen(true)} className="hover:text-paper">

@@ -26,5 +26,9 @@ export default function ChapterRoot({ id, children, onActiveFrame }: ChapterRoot
     if (group.current) group.current.visible = active;
     if (active) onActiveFrame?.(state.scene);
   });
-  return <group ref={group}>{children}</group>;
+  return (
+    <group ref={group} userData={{ chapterRoot: id, applyWorld: onActiveFrame }}>
+      {children}
+    </group>
+  );
 }

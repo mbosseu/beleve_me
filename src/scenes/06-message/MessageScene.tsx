@@ -79,7 +79,7 @@ export default function MessageScene() {
   const tier = caps?.tier ?? "mobile";
   const reduced = caps?.reducedMotion ?? false;
   const url = tier === "high" ? "/textures/illustration-original.jpg" : "/textures/illustration-original-mobile.jpg";
-  const count = tier === "high" ? 60000 : tier === "mobile" ? 28000 : 20000;
+  const count = tier === "high" ? 42000 : tier === "mobile" ? 22000 : 16000;
   const texture = useTexture(url);
 
   const { geometry, material } = useMemo(() => {

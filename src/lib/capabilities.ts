@@ -36,8 +36,8 @@ export function detectCapabilities(): Capabilities {
     isMobile,
     reducedMotion,
     webgl: hasWebGL(),
-    dpr: tier === "high" ? [1, 2] : tier === "mobile" ? [1, 1.5] : [1, 1.25],
-    shadowMapSize: tier === "high" ? 2048 : 1024,
+    dpr: tier === "high" ? [1, 1.5] : tier === "mobile" ? [1, 1.5] : [1, 1],
+    shadowMapSize: tier === "high" ? 1024 : 512,
     dustCount: reducedMotion ? 0 : tier === "high" ? 520 : tier === "mobile" ? 220 : 140,
   };
 }

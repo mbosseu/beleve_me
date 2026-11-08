@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { activeChapterId, progress } from "@/experience/progress";
+import { activeChapterId, DAMPING, justJumped, progress } from "@/experience/progress";
 import { useExperience } from "@/experience/store";
 
 type Variant = "display" | "statement" | "caption" | "label";
@@ -370,7 +370,7 @@ export default function Narration() {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       // Same damping as the camera so words land with the shot.
-      const k = 1 - Math.exp(-dt * (reduced ? 12 : 2.6));
+      const k = justJumped() ? 1 : 1 - Math.exp(-dt * (reduced ? 12 : DAMPING));
       for (const id in smoothed) smoothed[id] += (progress[id] - smoothed[id]) * k;
       const p = smoothed.beginning;
       const p2 = smoothed.inspiration;

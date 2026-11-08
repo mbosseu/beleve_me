@@ -116,11 +116,11 @@ export default function CollectionScene() {
       {/* Polished concrete floor + wall */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[40, 20]} />
-        <meshStandardMaterial color="#141413" roughness={0.32} metalness={0.1} />
+        <meshLambertMaterial color="#141413" />
       </mesh>
       <mesh position={[0, 3, WALL_Z]} receiveShadow>
         <planeGeometry args={[40, 8]} />
-        <meshStandardMaterial color="#121211" roughness={0.95} />
+        <meshLambertMaterial color="#121211" />
       </mesh>
 
       {products.map((p, i) => {

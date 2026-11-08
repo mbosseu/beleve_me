@@ -25,7 +25,7 @@ export const chapters: Chapter[] = [
     title: "The Beginning",
     label: "Le commencement",
     status: "live",
-    length: 7,
+    length: 5,
     Scene: lazy(() => import("@/scenes/01-beginning/BeginningScene")),
   },
   {
@@ -34,7 +34,7 @@ export const chapters: Chapter[] = [
     title: "The Inspiration",
     label: "L'inspiration",
     status: "live",
-    length: 8,
+    length: 6,
     Scene: lazy(() => import("@/scenes/02-inspiration/InspirationScene")),
   },
   {
@@ -43,7 +43,7 @@ export const chapters: Chapter[] = [
     title: "The Creation",
     label: "La création",
     status: "live",
-    length: 10,
+    length: 7,
     Scene: lazy(() => import("@/scenes/03-creation/CreationScene")),
   },
   {
@@ -52,7 +52,7 @@ export const chapters: Chapter[] = [
     title: "The Signature Piece",
     label: "La pièce signature",
     status: "live",
-    length: 11,
+    length: 8,
     Scene: lazy(() => import("@/scenes/04-signature/SignatureScene")),
   },
   {
@@ -61,7 +61,7 @@ export const chapters: Chapter[] = [
     title: "The Collection",
     label: "La collection",
     status: "live",
-    length: 10,
+    length: 7,
     Scene: lazy(() => import("@/scenes/05-collection/CollectionScene")),
   },
   {
@@ -70,7 +70,7 @@ export const chapters: Chapter[] = [
     title: "The Message",
     label: "Le message",
     status: "live",
-    length: 7,
+    length: 5,
     Scene: lazy(() => import("@/scenes/06-message/MessageScene")),
   },
 ];

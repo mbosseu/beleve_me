@@ -20,7 +20,7 @@ const NIGHT = new THREE.Color("#090909");
 export default function InspirationScene() {
   const caps = useExperience((s) => s.caps);
   const tier = caps?.tier ?? "mobile";
-  const count = tier === "high" ? 70000 : tier === "mobile" ? 34000 : 24000;
+  const count = tier === "high" ? 48000 : tier === "mobile" ? 26000 : 18000;
   const url = tier === "high" ? "/textures/illustration-original.jpg" : "/textures/illustration-original-mobile.jpg";
 
   const world = useMemo(() => ({ paper: new THREE.Color("#ebe8e2"), background: new THREE.Color() }), []);

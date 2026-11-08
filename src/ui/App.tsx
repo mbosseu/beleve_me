@@ -46,6 +46,7 @@ export default function App() {
       <ProductSheet />
       <CartDrawer />
       <Intro />
+      <div id="jump-curtain" className="jump-curtain" aria-hidden />
       <div className="grain" aria-hidden />
       <div className="vignette" aria-hidden />
 
@@ -101,10 +102,11 @@ export default function App() {
                 DÉCOUVRIR LA COLLECTION
               </button>
               <button
-                onClick={() => {
-                  scrollToChapterProgress("collection", 0.58);
-                  window.setTimeout(() => useExperience.getState().focus("doudoune-signature"), 3000);
-                }}
+                onClick={() =>
+                  scrollToChapterProgress("collection", 0.58, () =>
+                    window.setTimeout(() => useExperience.getState().focus("doudoune-signature"), 350),
+                  )
+                }
                 className="bg-paper px-9 py-4 font-sans text-[10px] tracking-[0.42em] text-ink transition-colors hover:bg-embroidery"
               >
                 LA BOUTIQUE

@@ -21,7 +21,15 @@ export const scene = {
   /** Normalised pointer position, -1 → 1. */
   pointerX: 0,
   pointerY: 0,
+  /** Timestamp of the last cut-jump; smoothed values snap instead of sweeping. */
+  jumpAt: -1,
 };
+
+/** How fast cameras and narration catch up with the scroll (per second). */
+export const DAMPING = 4.6;
+
+/** True right after a cut-jump: followers should snap to the new position. */
+export const justJumped = () => scene.jumpAt > 0 && performance.now() - scene.jumpAt < 450;
 
 /** The chapter currently owning the camera: the last one that has started. */
 export function activeChapterId(): string {
